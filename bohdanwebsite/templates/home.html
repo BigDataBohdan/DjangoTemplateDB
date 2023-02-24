@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<br/>
+    <h1  >Post</h1>
+    <ul>
+        {% for post in object_list%}
+        <br/>
+        <li><small>{{post.post_date}}</small><br/><a href="{%url 'article-detail' post.pk%}">
+            {{post.title}}</a>
+            
+            
+           <a href="{% url 'category' post.category|slugify %}">{{post.category}}</a>  
+     
+            
+            <br/> 
+            {%if user.is_authenticated%}
+                {%if user.id == post.author.id%}
+                    <a href="{%url 'update_post' post.pk%}">EDIT</a>
+                    <small><a href="{%url 'delete_post' post.pk%}">Delete</a></small>
+                {% endif%}
+            {% endif%}
+
+            <!--{{post.snippet}}-->
+            <!--{{post.body|slice:"299"|safe}}-->
+
+
+
+            <div class="card" style="width: 30rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><small>{{post.post_date}}</small><br/><a href="{%url 'article-detail' post.pk%}">
+                    {{post.title}}</a></h5>
+                  <p class="card-text"> {{post.body|slice:"299"|safe}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">An item</li>
+                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+        <br>
+        <p><b> -{{post.author.first_name}}{{post.author.last_name}}</b></p>
+       
+        <br>
+        {%endfor%}
+    </ul>
+    <br/>
+
+{% endblock %}
+
+ 

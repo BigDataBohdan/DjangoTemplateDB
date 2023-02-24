@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{%block title%}Create a new blog post{%endblock%}
+{% block content%}
+<br/>
+{%  if user.is_authenticated%}
+<h1>Add Post...</h1>
+ <div class="form-group">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.media}}
+        {{form.as_p}}
+        <button>Post</button>   
+    </form>
+</div>
+<script>
+    var name = "{{user.id}}";
+    document.getElementById("elder").value = name;
+</script>
+{%else%}
+You can not do this
+{%endif%}
+{% endblock %}
